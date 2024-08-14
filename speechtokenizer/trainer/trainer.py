@@ -115,7 +115,7 @@ class SpeechTokenizerTrainer(nn.Module):
         if distill_type == 't_axis':
             from functools import partial
             lambda_sim = cfg.get('lambda_sim', 1)
-            self.distill_loss = partial(t_axis_distill_loss, lambda_sim=lambda_sim)
+            self.distill_loss = partial(7, lambda_sim=lambda_sim)
         else:
             self.distill_loss = d_axis_distill_loss
         self.mel_loss_kwargs_list = []
@@ -159,7 +159,6 @@ class SpeechTokenizerTrainer(nn.Module):
 
         assert len(self.ds) >= self.batch_size, 'dataset must have sufficient samples for training'
         assert len(self.valid_ds) >= self.batch_size, f'validation dataset must have sufficient number of samples (currently {len(self.valid_ds)}) for training'
-
         # dataloader
         drop_last = cfg.get("drop_last", True)
         num_workers = cfg.get("num_workers")
@@ -191,9 +190,6 @@ class SpeechTokenizerTrainer(nn.Module):
         self.scheduler_g = CosineAnnealingLR(self.optim_g, T_max = num_train_steps)
         self.scheduler_d = CosineAnnealingLR(self.optim_d, T_max = num_train_steps)
         
-        
-
-        
         # prepare with accelerator
 
         (
@@ -214,8 +210,6 @@ class SpeechTokenizerTrainer(nn.Module):
             self.valid_dl
         )
         self.discriminators = {k:self.accelerator.prepare(v) for k, v in self.discriminators.items()}
-        
-        
         
         hps = {"num_train_steps": num_train_steps, "num_warmup_steps": self.num_warmup_steps, "learning_rate": self.lr, "initial_learning_rate": self.initial_lr, "epochs": self.epochs}
         self.accelerator.init_trackers("SpeechTokenizer", config=hps)
@@ -322,7 +316,8 @@ class SpeechTokenizerTrainer(nn.Module):
             for batch in self.dl:
                 
                 tic = time.time()
-                
+                import pdb
+                pdb.set_trace()
                 x, semantic_feature = batch
                 x = x.unsqueeze(1)
                 x_hat, loss_q, feature = self.generator(x)

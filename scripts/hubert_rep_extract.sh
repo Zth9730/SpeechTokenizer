@@ -1,6 +1,6 @@
 CONFIG="config/spt_base_cfg.json"
-AUDIO_DIR="/remote-home/share/data/SpeechPretrain/LibriSpeech/LibriSpeech"
-REP_DIR="/remote-home/share/data/SpeechPretrain/hubert_rep/LibriSpeech"
+AUDIO_DIR="/mnt/petrelfs/zhoudinghao/data/librispeech/LibriSpeech"
+REP_DIR="/mnt/petrelfs/zhoudinghao/work/thzhang/SpeechTokenizer/SpeechPretrain/hubert_rep/LibriSpeech"
 EXTS="flac"
 SPLIT_SEED=0
 VALID_SET_SIZE=1500

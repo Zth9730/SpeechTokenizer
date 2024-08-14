@@ -24,7 +24,6 @@ def collate_fn(data):
         else:
             output = torch.tensor(list(datum))
         outputs.append(output)
-
     return tuple(outputs)
 
 def get_dataloader(ds, **kwargs):
@@ -68,4 +67,4 @@ class audioDataset(Dataset):
         else:
             if not self.valid:
                 audio = torch.nn.functional.pad(audio, (0, self.segment_size - audio.size(-1)), 'constant')
-        return audio, feature
+        return audio, feature.squeeze(0)

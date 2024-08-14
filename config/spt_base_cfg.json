@@ -27,12 +27,12 @@
     "distill_loss_lambda": 120,
     "distill_type": "d_axis",
 
-    "semantic_model_path": "/remote-home/share/models/hubert/ls_960/hubert-base-ls960",
+    "semantic_model_path": "pretrain_model/hubert-base-ls960",
     "semantic_model_layer": "avg",
 
     "train_files":"train_file_list.txt",
     "valid_files":"dev_file_list.txt",
-    "results_folder": "Log/spt_base",
+    "results_folder": "Log/debug",
     "sample_rate": 16000,
     "batch_size": 6,
     "epochs":10,
